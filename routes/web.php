@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\inicioController;
 use App\Http\Controllers\productoController;
+use App\Http\Controllers\categoriaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,7 +27,6 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',])
     Route::get('/dashboard', function () {return view('dashboard');})->name('dashboard');
 
     Route::controller(productoController::class)->group(function(){
-
         route::get('producto', 'principal')->name('producto.principal');
     
         route::get('producto/{variable}/mostrar', 'mostrar')->name('producto.mostrar');    
@@ -42,10 +42,31 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',])
     
         route::delete('producto/{id}', 'borrar')->name('producto.borrar');
     
-        route::get('desactiva/{id}', 'desactivaproducto')->name('desactivapro');
+        route::get('desactivar/{id}', 'desactivaproducto')->name('desactivapro');
     
-        route::get('activa/{id}', 'activaproducto')->name('activapro');
+        route::get('activar/{id}', 'activaproducto')->name('activapro');
+
     });
     //Eduardo Reyes
+    Route::controller(categoriaController::class)->group(function(){
+
+        route::get('categoria', 'principal')->name('categoria.principal'); 
+
+        route::get('categoria/{variable}/mostrar', 'mostrar')->name('categoria.mostrar');   
+
+        route::get('categoria/crear', 'crear')->name('categoria.crear');
     
+        route::post('categoria','store')->name('categoria.store');
+
+        Route::get('categoria/{categoria}/edit', 'editar')->name('categoria.editar');
+    
+        route::put('categoria/{categoria}', 'update')->name('categoria.update');
+
+        route::delete('categoria/{id}', 'borrar')->name('categoria.borrar');
+    
+        route::get('desactiva/{id}', 'desactivacategoria')->name('desactivacat');
+    
+        route::get('activa/{id}', 'activacategoria')->name('activacat');
+
+    });
 });
