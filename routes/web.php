@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\inicioController;
 use App\Http\Controllers\productoController;
 use App\Http\Controllers\categoriaController;
+use App\Http\Controllers\usuarioController;
 
 /*
 |--------------------------------------------------------------------------
@@ -69,4 +70,27 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',])
         route::get('activa/{id}', 'activacategoria')->name('activacat');
 
     });
+
+
+    Route::controller(usuarioController::class)->group(function(){
+
+        route::get('user', 'principal')->name('usuario.principal');
+
+        route::get('user/{variable}/mostrar', 'mostrar')->name('usuario.mostrar'); 
+
+        route::get('user/crear', 'crear')->name('usuario.crear');
+    
+        route::post('user','store')->name('usuario.store');
+
+        Route::get('user/{user}/edit', 'editar')->name('usuario.editar');
+    
+        route::put('user/{user}', 'update')->name('usuario.update');
+
+        route::delete('user/{id}', 'borrar')->name('usuario.borrar');
+    
+        route::get('desactivau/{id}', 'desactivausuario')->name('desactivaus');
+    
+        route::get('activau/{id}', 'activausuario')->name('activaus');
+    });
+
 });
