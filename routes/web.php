@@ -5,6 +5,7 @@ use App\Http\Controllers\inicioController;
 use App\Http\Controllers\productoController;
 use App\Http\Controllers\categoriaController;
 use App\Http\Controllers\usuarioController;
+use App\Http\Controllers\roleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -92,5 +93,17 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',])
     
         route::get('activau/{id}', 'activausuario')->name('activaus');
     });
+
+
+    Route::controller(roleController::class)->group(function(){
+
+        route::get('role', 'principal')->name('role.principal');
+        route::get('role/{variable}/mostrar', 'mostrar')->name('role.mostrar'); 
+        route::get('role/crear', 'crear')->name('role.crear');
+        route::post('role','store')->name('role.store');
+        Route::get('role/{role}/edit', 'editar')->name('role.editar');
+        route::put('role/{role}', 'update')->name('role.update');
+    });
+
 
 });

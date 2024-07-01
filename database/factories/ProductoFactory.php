@@ -23,7 +23,7 @@ class ProductoFactory extends Factory
                 'precio' => fake()->randomDigit(),
                 'descripcion' => fake()-> paragraph(),
                 'categoria' => $this->faker->randomElement(['gaseosas','lacteos','accesorios']),
-                'categoria_id'=>Categoria::inRandomOrder()->first()
+                'categoria_id'=>$this->faker->randomElement([1,2,3,4,5]),
 
         ];
     }
